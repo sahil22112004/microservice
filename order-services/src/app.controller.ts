@@ -1,6 +1,5 @@
-import { Controller, Get } from '@nestjs/common';
-import { AppService } from './app.service';
-import { MessagePattern, Payload } from '@nestjs/microservices';
+import { Controller, Get } from '@nestjs/common'
+import { AppService } from './app.service'
 
 @Controller()
 export class AppController {
@@ -8,10 +7,6 @@ export class AppController {
 
   @Get()
   getHello(): string {
-    return this.appService.getHello();
-  }
-  @MessagePattern("order-created")
-  handleOrderCreated(@Payload() order:any){
-    console.log('[Order-Service]:Recived new order:',order)
+    return this.appService.getHello()
   }
 }

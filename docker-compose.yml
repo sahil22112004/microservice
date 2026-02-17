@@ -53,7 +53,6 @@ services:
       DB_DATABASE: foodapp
     depends_on:
       - db
-      - rabbitmq
 
   order-services:
     build: ./order-services
@@ -62,8 +61,7 @@ services:
     volumes:
       - ./order-services:/app
       - /app/node_modules
-    depends_on:
-      - rabbitmq
+
 
 volumes:
   pgdata:

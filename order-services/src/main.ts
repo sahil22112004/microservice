@@ -1,22 +1,11 @@
-import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
-import { Logger } from '@nestjs/common';
-import { MicroserviceOptions, Transport } from '@nestjs/microservices';
+import { NestFactory } from '@nestjs/core'
+import { AppModule } from './app.module'
+import { Logger } from '@nestjs/common'
 
 async function bootstrap() {
-  const app = await NestFactory.createMicroservice<MicroserviceOptions>(AppModule, {
-    transport: Transport.RMQ,
-    options: {
-      urls: ['amqp://guest:guest@rabbitmq:5672'],
-      queue: 'order_queue',
-      queueOptions: {
-        durable: true
-      }
-    }
-  });
-
-  await app.listen();
-  Logger.log('Order Service is listening on RabbitMQ');
+  const app = await NestFactory.create(AppModule)
+  await app.listen(process.env.PORT ?? 3001)
+  Logger.log('Order Service is running')
 }
 
-bootstrap();
+bootstrap()
